@@ -1,0 +1,72 @@
+...
+prakhyatshiroor.github.io
+import random
+import string
+
+def blankgen(n):
+    blankstr="_"
+    for i in range(0,n-1):
+        blankstr="_ "+blankstr
+    return blankstr 
+
+    
+dect=["INDIA","CHINA","ENGLAND","DUBAI","GERMANY","FRANCE","ITALY","JAPAN","MEXICO","BRAZIL","EGYPT","MALASIYA"]
+reqword=str(random.choice(dect))
+wordlen=len(reqword)
+if(wordlen<=5):
+    k1=random.randint(2,3)
+else:
+    k1=random.randint(3,4)
+
+filledwords=random.sample(reqword,k=k1)
+blankstr1=blankgen(wordlen)
+
+
+'''print(filledwords)
+print(wordlen)
+print(reqword)
+print(blankstr1)'''
+for i in range(0,wordlen):
+    for j in range(0,k1):
+        if reqword[i]==filledwords[j]:
+            #print(reqword[i],end="")
+            if(i==0):
+                blankstr1=reqword[i]+blankstr1[(2*i)+1:]
+            else:    
+                blankstr1=blankstr1[0:(2*i)]+reqword[i]+blankstr1[(2*i)+1:]
+        else:
+            continue
+print(blankstr1)
+chance=1
+while(chance<=3):
+    blankstr2=blankstr1.replace(" ","")
+    if((blankstr2 != reqword) and chance<4):
+        pos=int(input("enter positon : "))
+        inputchar=input("Enter character: ")
+        
+        pos=pos-1
+        if(inputchar.upper()==reqword[pos]):
+            blankstr1=blankstr1[0:(2*pos)]+reqword[pos]+blankstr1[(2*pos)+1:]
+            blankstr3=blankstr1.replace(" ","")
+            if(blankstr3 != reqword):
+                print("well done go ahead")
+                print(blankstr1)
+                continue
+            else:
+                print(blankstr1)
+                print("YOU WON")
+                exit(0)
+            
+        elif(chance<3):
+            print("sorry,try again")
+            print(blankstr1)
+            chance=chance+1
+            
+        elif(chance==3):
+            print("YOU LOST :(")
+            exit(0)
+         
+        
+    else:
+        
+        exit(0)
